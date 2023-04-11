@@ -3,35 +3,35 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#define MAX_VEICULOS 10 // Define o número máximo de veículos
-#define MAX_USERS 100 // Define o número máximo de usuários
-#define MAX_USERNAME_LENGTH 20 // Define o comprimento máximo do nome de usuário
-#define MAX_PASSWORD_LENGTH 20 // Define o comprimento máximo da senha
-#define MAX_FUNCIONARIOS 100 // Define o máximo de funcionário
+#define MAX_VEICULOS 10 // Define o numero maximo de veiculos
+#define MAX_USERS 100 // Define o numero maximo de usuarios
+#define MAX_USERNAME_LENGTH 20 // Define o comprimento maximo do nome de usuario
+#define MAX_PASSWORD_LENGTH 20 // Define o comprimento maximo da senha
+#define MAX_FUNCIONARIOS 100 // Define o maximo de funcionario
 
-// Estrutura para armazenar informações do usuário
+// Estrutura para armazenar informaÃ§Ãµes do usuario
 typedef struct
 {
-    char username[MAX_USERNAME_LENGTH+1]; // Nome de usuário
+    char username[MAX_USERNAME_LENGTH+1]; // Nome de usuario
     char password[MAX_PASSWORD_LENGTH+1]; // Senha
 } User;
 
-// Definição da estrutura para armazenar informações do funcionário
+// DefiniÃ§Ã£o da estrutura para armazenar informaÃ§Ãµes do funcionario
 struct funcionario
 {
     char nome[50];
     char funcao[50];
 };
 
-// Definição da estrutura para armazenar informações do veículo
+// DefiniÃ§Ã£o da estrutura para armazenar informacoes do veiculo
 typedef struct
 {
     char modelo[50];
     char placa[8];
-    int status; // 0 - livre; 1 - em uso; 2 - em manutenção
+    int status; // 0 - livre; 1 - em uso; 2 - em manutencao
 } Veiculo;
 
-// Função para verificar se um usuário já existe na lista de usuários
+// FunÃ§Ã£o para verificar se um usuario ja existe na lista de usuarios
 int user_exists(User users[], int num_users, char username[]);
 
 int opcao;
@@ -57,16 +57,16 @@ int user_exists(User users[], int num_users, char username[])
     {
         if (strcmp(users[i].username, username) == 0)
         {
-            return 1; // Usuário já existe
+            return 1; // Usuario ja existe
         }
     }
-    return 0; // Usuário não existe
+    return 0; // Usuario nao existe
 }
 
 void login()
 {
-    User users[MAX_USERS]; // Lista de usuários
-    int num_users = 0; // Número atual de usuários cadastrados
+    User users[MAX_USERS]; // Lista de usuarios
+    int num_users = 0; // Numero atual de usuarios cadastrados
 
     // Loop principal do programa
     while (1)
@@ -75,7 +75,7 @@ void login()
         printf("1. Login\n");
         printf("2. Cadastro\n");
         printf("0. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
 
         scanf("%d", &opcao);
 
@@ -84,7 +84,7 @@ void login()
         case 1: // Login
             printf("\n=== LOGIN ===\n");
 
-            // Lê o nome de usuário e a senha
+            // LÃª o nome de usuario e a senha
             char username[MAX_USERNAME_LENGTH+1];
             char password[MAX_PASSWORD_LENGTH+1];
             printf("Nome de usuario: ");
@@ -92,7 +92,7 @@ void login()
             printf("Senha: ");
             scanf("%s", password);
 
-            // Verifica se o usuário e a senha estão corretos
+            // Verifica se o usuario e a senha estao corretos
             int user_found = 0;
             for (int i = 0; i < num_users; i++)
             {
@@ -118,7 +118,7 @@ void login()
         case 2: // Cadastro
             printf("\n=== CADASTRO ===\n");
 
-            // Lê o nome de usuário e a senha
+            // Le o nome de usuario e a senha
             char new_username[MAX_USERNAME_LENGTH+1];
             char new_password[MAX_PASSWORD_LENGTH+1];
             printf("Novo nome de usuario: ");
@@ -127,14 +127,14 @@ void login()
             fflush(stdin);
             scanf("%s", new_password);
 
-            // Verifica se o nome de usuário já existe
+            // Verifica se o nome de usuario ja existe
             if (user_exists(users, num_users, new_username))
             {
                 printf("\nNome de usuario ja existe. Tente novamente");
             }
             else
             {
-                // Adiciona o novo usuário à lista de usuários
+                // Adiciona o novo usuÃ¡rio a lista de usuarios
                 User new_user;
                 strcpy(new_user.username, new_username);
                 strcpy(new_user.password, new_password);
@@ -148,7 +148,7 @@ void login()
             printf("\nSaindo do programa...\n");
             return 0;
 
-        default: // Opção inválida
+        default: // OpÃ§Ã£o invalida
             printf("\nOpcao invalida. Tente novamente.\n");
             break;
         }
@@ -159,27 +159,27 @@ void cadastrarVeiculo(Veiculo veiculos[], int *qtdVeiculos)
 {
     if (*qtdVeiculos >= MAX_VEICULOS)
     {
-        printf("Limite de veículos atingido!\n");
+        printf("Limite de veiculos atingido!\n");
         return;
     }
 
     Veiculo v;
-    printf("Digite o modelo do veículo: ");
+    printf("Digite o modelo do veiculo: ");
     scanf("%s", v.modelo);
-    printf("Digite a placa do veículo (formato XXX-YYYY): ");
+    printf("Digite a placa do veiculo (formato XXX-YYYY): ");
     scanf("%s", v.placa);
-    printf("Digite o status do veículo (0 - livre, 1 - ocupado, 2 - em manutenção): ");
+    printf("Digite o status do veiculo (0 - livre, 1 - ocupado, 2 - em manutencao): ");
     scanf("%d", &v.status);
 
     veiculos[*qtdVeiculos] = v;
     (*qtdVeiculos)++;
 
-    printf("Veículo cadastrado com sucesso!\n");
+    printf("Veiculo cadastrado com sucesso!\n");
 }
 
 void exibirVeiculos(Veiculo veiculos[], int qtdVeiculos)
 {
-    printf("Lista de veículos cadastrados:\n");
+    printf("Lista de veiculos cadastrados:\n");
     printf("-------------------------------\n");
     for (int i = 0; i < qtdVeiculos; i++)
     {
@@ -194,10 +194,10 @@ void exibirVeiculos(Veiculo veiculos[], int qtdVeiculos)
             printf("Status: ocupado\n");
             break;
         case 2:
-            printf("Status: em manutenção\n");
+            printf("Status: em manutencao\n");
             break;
         default:
-            printf("Status inválido!\n");
+            printf("Status invalido!\n");
             break;
         }
         printf("-------------------------------\n");
@@ -211,10 +211,10 @@ void cadastroVeiculo()
 
     do
     {
-        printf("\n1 - Cadastrar veículo\n");
-        printf("2 - Exibir veículos cadastrados\n");
+        printf("\n1 - Cadastrar veiculo\n");
+        printf("2 - Exibir veiculos cadastrados\n");
         printf("0 - Sair\n");
-        printf("Digite a opção desejada: ");
+        printf("Digite a opcao desejada: ");
         scanf("%d", &opcao);
 
         switch (opcao)
@@ -229,7 +229,7 @@ void cadastroVeiculo()
             printf("Encerrando programa...\n");
             break;
         default:
-            printf("Opção inválida!\n");
+            printf("Opcao invalida!\n");
             break;
         }
     }
@@ -238,10 +238,10 @@ void cadastroVeiculo()
 
 void reclamacoes()
 {
-    char reclamacao[1000]; // Define um array para armazenar a reclamação do usuário
+    char reclamacao[1000]; // Define um array para armazenar a reclamaÃ§Ã£o do usuario
 
-    // Solicita ao usuário para digitar a reclamação
-    printf("Digite sua reclamação:\n");
+    // Solicita ao usuario para digitar a reclamacao
+    printf("Digite sua reclamacao:\n");
     fflush(stdin);
     scanf("%[^\n]", reclamacao);
 
@@ -253,14 +253,14 @@ void reclamacoes()
         return 1;
     }
 
-    // Escreve a reclamação do usuário no arquivo
+    // Escreve a reclamacao do usuario no arquivo
     fprintf(arquivo, "%s\n", reclamacao);
 
     // Fecha o arquivo
     fclose(arquivo);
 
-    // Exibe uma mensagem de confirmação para o usuário
-    printf("Sua reclamação foi salva com sucesso.\n");
+    // Exibe uma mensagem de confirmaÃ§Ã£o para o usuario
+    printf("Sua reclamacao foi salva com sucesso.\n");
 }
 
 void cadastroFuncionario()
@@ -303,7 +303,7 @@ void tela2()
     {
         printf("Escolha uma opcao:\n");
         printf("1 - Cadastro\n");
-        printf("2 - Reclamações\n");
+        printf("2 - Reclamacoes\n");
         printf("0 - Sair\n");
         scanf("%d", &opcao);
 
